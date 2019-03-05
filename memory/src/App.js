@@ -12,12 +12,30 @@ class App extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  youLoss(){
+    console.log("You Loss");
+    //Rerender Game
+  }
+
+  randomizeCards = () => {
+
+    var cardSleeve = document.querySelector('.cardDiv');
+    for (var i = cardSleeve.children.length; i >= 0; i--) {
+        cardSleeve.appendChild(cardSleeve.children[Math.random() * i | 0]);
+    }
+  }
+
   handleChange(id) {
     this.setState(prevState => {
       
     var updatedCardState = prevState.CardState.map(upCard => {
-        if (upCard.id === id) {
+       if(upCard.id ===id &&  upCard.clicked > 0){
+          this.youLoss();
+       } else if (upCard.id === id) {
           upCard.clicked = upCard.clicked + 1;
+          console.log(this.state.CardState)
+          this.randomizeCards(this.state.CardState);
+          console.log(this.state.CardState)
         }
         return upCard;
       });
@@ -40,7 +58,7 @@ class App extends React.Component {
       />
     ));
 
-    return <div>{CardComponent}</div>;
+    return <div className="cardDiv">{CardComponent}</div>;
   }
 }
 export default App;
