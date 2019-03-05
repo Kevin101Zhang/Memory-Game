@@ -10,13 +10,15 @@ function Card(props) {
   const styleDiv={
     backgroundColor: "lightblue",
     width: "200px",
-    height:"225px",
+    height:"275px",
     textAlign: "center",
     float:"left",
     margin: "5px",
-    marginBottom: "50px",
+    marginBottom: "10px",
     fontFamily: "fantasy",
     fontSize:"15px",
+    borderRadius: "15px",
+    boxShadow:"5px 8px #888888"
   }
 
   return (
