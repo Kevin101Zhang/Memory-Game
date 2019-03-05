@@ -18,7 +18,7 @@ function Card(props) {
     fontFamily: "fantasy",
     fontSize:"15px",
     borderRadius: "15px",
-    boxShadow:"5px 8px #888888"
+    boxShadow:"0 10px 6px -3px #777"
   }
 
   return (

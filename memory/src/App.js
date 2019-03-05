@@ -7,23 +7,29 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      CardState: CardData
+      CardState: CardData,
+      score: [],
     };
     this.handleChange = this.handleChange.bind(this);
   }
 
-  youLoss() {
-    alert("You Loss");
-    this.setState()//RESET STATE
-    //RESET SCORE
-    
+  componentDidMount() {
+    this.setState({score: 0})
+    this.setState({highscore: 0})
   }
 
-  Score(){
-    // CREATE SCORE
-  }
+  youLoss = () => {
+    alert(`You Loss\n Final Score: ${this.state.Score}`);
+    // Reset Function
+  };
 
-  randomizeCards = () => {
+  Score = () => {
+    // this.setState((state) => {
+    //   return {score: state.score + 1}
+    // })
+  };
+
+  randomizer = () => {
     var cardSleeve = document.querySelector(".cardDiv");
     for (var i = cardSleeve.children.length; i >= 0; i--) {
       cardSleeve.appendChild(cardSleeve.children[(Math.random() * i) | 0]);
@@ -37,13 +43,11 @@ class App extends React.Component {
           this.youLoss();
         } else if (upCard.id === id) {
           upCard.clicked = upCard.clicked + 1;
-          console.log(this.state.CardState);
-          this.randomizeCards(this.state.CardState);
-          console.log(this.state.CardState);
+          this.randomizer(this.state.CardState);
+          this.Score();
         }
         return upCard;
       });
-
       return {
         CardState: updatedCardState
       };
