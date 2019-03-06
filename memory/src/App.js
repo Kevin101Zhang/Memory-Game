@@ -8,25 +8,30 @@ class App extends React.Component {
     super();
     this.state = {
       CardState: CardData,
-      score: [],
+      score: 0,
+      highScore: 0
     };
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount() {
-    this.setState({score: 0})
-    this.setState({highscore: 0})
-  }
-
   youLoss = () => {
-    alert(`You Loss\n Final Score: ${this.state.Score}`);
-    // Reset Function
+    alert(`You Loss\n Final Score: ${this.state.score}`);
+
+    var ResetData = this.state.CardState.map(resetting => {
+      if (resetting.clicked === 1) {
+        resetting.clicked = 0;
+      }
+      return resetting;
+    });
+    return {
+      CardState: ResetData
+    };
   };
 
   Score = () => {
-    // this.setState((state) => {
-    //   return {score: state.score + 1}
-    // })
+    this.setState(state => {
+      return { score: state.score + 1 };
+    });
   };
 
   randomizer = () => {
@@ -41,10 +46,12 @@ class App extends React.Component {
       var updatedCardState = prevState.CardState.map(upCard => {
         if (upCard.id === id && upCard.clicked > 0) {
           this.youLoss();
+          this.randomizer();
+          // this.ScoreReset();
         } else if (upCard.id === id) {
           upCard.clicked = upCard.clicked + 1;
-          this.randomizer(this.state.CardState);
           this.Score();
+          this.randomizer(this.state.CardState);
         }
         return upCard;
       });
